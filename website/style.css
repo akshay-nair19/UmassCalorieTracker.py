@@ -1,0 +1,122 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: #333;
+    background-color: #f5f5f5; /* Light background color */
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #B60000; /* UMass red */
+    color: #fff;
+    padding: 2em;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 1em 0;
+    margin-bottom: 2em;
+}
+
+nav a {
+    color: #B60000;
+    text-decoration: none;
+    margin: 0 1.5em;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #660000; /* Darker shade on hover */
+}
+
+/* Page Layout */
+.container {
+    padding: 2em;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.container h2 {
+    color: #B60000;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.container p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 1.5em;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    background-color: #B60000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #990000;
+    transform: scale(1.05);
+}
+
+/* Placeholder for Images */
+.image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    font-style: italic;
+    border-radius: 8px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #B60000;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    font-size: 0.9em;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
