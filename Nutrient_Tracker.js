@@ -1,7 +1,26 @@
 let nutrientTracker = {
-    macronutrients: { "Protein": 0, "Carbohydrates": 0, "Fats": 0, "Cholesterol": 0 },
-    micronutrients: { "Vitamin C": 0, "Vitamin D": 0, "Calcium": 0, "Iron": 0, "Sodium": 0 },
-    totalCalories: 0
+    "Calories": 0,
+    "Total Fat": 0,
+    "Saturated Fat": 0,
+    "Trans Fat": 0,
+    "Cholesterol": 0,
+    "Sodium": 0,
+    "Total Carbohydrates": 0,
+    "Dietary Fiber": 0,
+    "Sugars": 0,
+    "Protein": 0
+};
+
+const nutrientUnits = {
+    "Total Fat": "g",
+    "Saturated Fat": "g",
+    "Trans Fat": "g",
+    "Cholesterol": "mg",
+    "Sodium": "mg",
+    "Total Carbohydrates": "g",
+    "Dietary Fiber": "g",
+    "Sugars": "g",
+    "Protein": "g"
 };
 
 // Parse CSV file and store data in a food database
@@ -13,19 +32,19 @@ fetch("foods.csv")
         const headers = lines[0].split(",");
         for (let i = 1; i < lines.length; i++) {
             const cells = lines[i].split(",");
-            const foodName = cells[0].trim().toLowerCase();
-            if (foodName) {
-                foodDatabase[foodName] = {
-                    "Protein": parseFloat(cells[1]) || 0,
-                    "Carbohydrates": parseFloat(cells[2]) || 0,
-                    "Fats": parseFloat(cells[3]) || 0,
-                    "Cholesterol": parseFloat(cells[4]) || 0,
-                    "Vitamin C": parseFloat(cells[5]) || 0,
-                    "Vitamin D": parseFloat(cells[6]) || 0,
-                    "Calcium": parseFloat(cells[7]) || 0,
-                    "Iron": parseFloat(cells[8]) || 0,
-                    "Sodium": parseFloat(cells[9]) || 0,
-                    "Calories": parseFloat(cells[10]) || 0
+            const dishName = cells[0].trim().toLowerCase();
+            if (dishName) {
+                foodDatabase[dishName] = {
+                    "Calories": parseFloat(cells[1]) || 0,
+                    "Total Fat": parseFloat(cells[2]) || 0,
+                    "Saturated Fat": parseFloat(cells[3]) || 0,
+                    "Trans Fat": parseFloat(cells[4]) || 0,
+                    "Cholesterol": parseFloat(cells[5]) || 0,
+                    "Sodium": parseFloat(cells[6]) || 0,
+                    "Total Carbohydrates": parseFloat(cells[7]) || 0,
+                    "Dietary Fiber": parseFloat(cells[8]) || 0,
+                    "Sugars": parseFloat(cells[9]) || 0,
+                    "Protein": parseFloat(cells[10]) || 0
                 };
             }
         }
@@ -38,16 +57,16 @@ function addFood() {
 
     if (foodDatabase[foodName] && servings > 0) {
         const foodNutrients = foodDatabase[foodName];
-        nutrientTracker.macronutrients["Protein"] += foodNutrients["Protein"] * servings;
-        nutrientTracker.macronutrients["Carbohydrates"] += foodNutrients["Carbohydrates"] * servings;
-        nutrientTracker.macronutrients["Fats"] += foodNutrients["Fats"] * servings;
-        nutrientTracker.macronutrients["Cholesterol"] += foodNutrients["Cholesterol"] * servings;
-        nutrientTracker.micronutrients["Vitamin C"] += foodNutrients["Vitamin C"] * servings;
-        nutrientTracker.micronutrients["Vitamin D"] += foodNutrients["Vitamin D"] * servings;
-        nutrientTracker.micronutrients["Calcium"] += foodNutrients["Calcium"] * servings;
-        nutrientTracker.micronutrients["Iron"] += foodNutrients["Iron"] * servings;
-        nutrientTracker.micronutrients["Sodium"] += foodNutrients["Sodium"] * servings;
-        nutrientTracker.totalCalories += foodNutrients["Calories"] * servings;
+        nutrientTracker["Calories"] += foodNutrients["Calories"] * servings;
+        nutrientTracker["Total Fat"] += foodNutrients["Total Fat"] * servings;
+        nutrientTracker["Saturated Fat"] += foodNutrients["Saturated Fat"] * servings;
+        nutrientTracker["Trans Fat"] += foodNutrients["Trans Fat"] * servings;
+        nutrientTracker["Cholesterol"] += foodNutrients["Cholesterol"] * servings;
+        nutrientTracker["Sodium"] += foodNutrients["Sodium"] * servings;
+        nutrientTracker["Total Carbohydrates"] += foodNutrients["Total Carbohydrates"] * servings;
+        nutrientTracker["Dietary Fiber"] += foodNutrients["Dietary Fiber"] * servings;
+        nutrientTracker["Sugars"] += foodNutrients["Sugars"] * servings;
+        nutrientTracker["Protein"] += foodNutrients["Protein"] * servings;
 
         document.getElementById("foodName").value = "";
         document.getElementById("servings").value = 1;
@@ -57,16 +76,15 @@ function addFood() {
     }
 }
 
+
 function updateSummary() {
-    let summary = "Macronutrients:\n";
-    for (const [key, value] of Object.entries(nutrientTracker.macronutrients)) {
-        summary += `  ${key}: ${value.toFixed(2)}g\n`;
+    let summary = "Nutrient Summary:\n";
+    for (const [key, value] of Object.entries(nutrientTracker)) {
+        summary += `  ${key}: ${value.toFixed(2)}`;
+        if (key !== "Calories") summary += ` ${nutrientUnits[key]}`;
+        summary += "\n";
     }
-    summary += "\nMicronutrients:\n";
-    for (const [key, value] of Object.entries(nutrientTracker.micronutrients)) {
-        summary += `  ${key}: ${value.toFixed(2)}mg\n`;
-    }
-    summary += `\nTotal Calories: ${nutrientTracker.totalCalories.toFixed(2)} kcal\n`;
 
     document.getElementById("summaryText").innerText = summary;
 }
+
