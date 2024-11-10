@@ -1,0 +1,157 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+
+body {
+    font-family: "San Francisco";
+    font-weight: 500;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+    color: #333;
+    background: linear-gradient(#B60000, #f6b5b5);    line-height: 2;
+}
+
+/* Header Styles */
+header {
+    background-color: #B60000;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s;
+}
+
+header h1 {
+    font-size: 7em;
+    margin-bottom: 0em;
+    transition: transform 0.3s ease;
+    letter-spacing: 3px;
+}
+
+header:hover h1 {
+    transform: scale(1.05);
+}
+
+header p {
+    font-size: 1.9em;
+    opacity: 0.9;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1em 0;
+    margin-bottom: 2em;
+    margin-top: 2px;
+}
+
+nav a {
+    font-family: "San Francisco";
+    font-weight: 400;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+    color: #B60000;
+    text-decoration: none;
+    margin: 0 1.5em;
+    font-weight: bold;
+    font-size: 1.7em;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #660000;
+    transform: scale(1.1);
+}
+
+/* Page Layout */
+.container {
+    padding: 2em;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 5em;
+    text-align: center;
+}
+
+.container h2 {
+    color: #B60000;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.container p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 1.5em;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    background-color: #B60000;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    font-size: 1.6em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #990000;
+    transform: scale(1.05);
+}
+
+/* Image Container with Zoom and Hover Effect */
+.image-crop-container {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 1.9em;
+    margin-bottom: 2em;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-crop-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.cropped-image {
+    width: 100%;
+    position: absolute;
+    top: -200px; /* Adjust to control crop */
+    left: 0;
+    transition: transform 0.5s ease;
+}
+
+.image-crop-container:hover .cropped-image {
+    transform: scale(1.05);
+}
+
+/* Placeholder for Images */
+.image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    font-style: italic;
+    border-radius: 8px;
+}
+

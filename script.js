@@ -3,23 +3,19 @@ let foods = {};
 let selectedFoods = [];
 
 // Elements for user interaction and results display
-const csvFileInput = document.getElementById('csvFileInput');
 const foodDropdown = document.getElementById('foodDropdown');
 const addFoodButton = document.getElementById('addFoodButton');
+const searchBar = document.getElementById('searchBar');
 const resultsEl = document.getElementById('results');
 
-// Load CSV and populate foods data
-csvFileInput.addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        const text = e.target.result;
-        parseCSVData(text);
+// Automatically fetch CSV file and populate food data
+fetch("unique_nutrition_facts.csv")
+    .then(response => response.text())
+    .then(csvText => {
+        parseCSVData(csvText);
         populateFoodDropdown();
-    };
-    reader.readAsText(file);
-});
+    })
+    .catch(error => console.error("Error loading CSV:", error));
 
 // Parse CSV data
 function parseCSVData(csvText) {
@@ -29,7 +25,7 @@ function parseCSVData(csvText) {
     lines.slice(1).forEach(line => {
         const values = line.split(',');
         if (values.length === headers.length) {
-            const foodName = values[0];
+            const foodName = values[0].toLowerCase(); // store food names in lowercase
             foods[foodName] = {
                 Calories: parseFloat(values[1]),
                 TotalFat: parseFloat(values[2]),
@@ -49,12 +45,12 @@ function parseCSVData(csvText) {
 // Populate dropdown with food items from CSV
 function populateFoodDropdown() {
     foodDropdown.innerHTML = ''; // Clear previous items
-    for (let food in foods) {
+    Object.keys(foods).forEach(food => {
         const option = document.createElement('option');
         option.value = food;
-        option.textContent = food;
+        option.textContent = food.charAt(0).toUpperCase() + food.slice(1); // Capitalize first letter
         foodDropdown.appendChild(option);
-    }
+    });
     foodDropdown.disabled = false;
     addFoodButton.disabled = false;
 }
@@ -62,8 +58,10 @@ function populateFoodDropdown() {
 // Add selected food to the list and calculate nutrients
 function addFoodToSelection() {
     const selectedFood = foodDropdown.value;
-    selectedFoods.push(selectedFood);
-    calculateNutrients();
+    if (selectedFood && !selectedFoods.includes(selectedFood)) {
+        selectedFoods.push(selectedFood);
+        calculateNutrients();
+    }
 }
 
 // Calculate and display nutrient summary
@@ -83,15 +81,30 @@ function calculateNutrients() {
 
     resultsEl.innerHTML = `
         <h3>Nutrient Summary</h3>
-        <p>Calories: ${totals.Calories}</p>
-        <p>Total Fat: ${totals.TotalFat}g</p>
-        <p>Saturated Fat: ${totals.SaturatedFat}g</p>
-        <p>Trans Fat: ${totals.TransFat}g</p>
-        <p>Cholesterol: ${totals.Cholesterol}mg</p>
-        <p>Sodium: ${totals.Sodium}mg</p>
-        <p>Total Carbohydrate: ${totals.TotalCarbohydrate}g</p>
-        <p>Dietary Fiber: ${totals.DietaryFiber}g</p>
-        <p>Sugars: ${totals.Sugars}g</p>
-        <p>Protein: ${totals.Protein}g</p>
+        <p>Calories: ${totals.Calories.toFixed(2)}</p>
+        <p>Total Fat: ${totals.TotalFat.toFixed(2)}g</p>
+        <p>Saturated Fat: ${totals.SaturatedFat.toFixed(2)}g</p>
+        <p>Trans Fat: ${totals.TransFat.toFixed(2)}g</p>
+        <p>Cholesterol: ${totals.Cholesterol.toFixed(2)}mg</p>
+        <p>Sodium: ${totals.Sodium.toFixed(2)}mg</p>
+        <p>Total Carbohydrate: ${totals.TotalCarbohydrate.toFixed(2)}g</p>
+        <p>Dietary Fiber: ${totals.DietaryFiber.toFixed(2)}g</p>
+        <p>Sugars: ${totals.Sugars.toFixed(2)}g</p>
+        <p>Protein: ${totals.Protein.toFixed(2)}g</p>
     `;
+}
+
+// Filter foods in dropdown based on search input
+function filterFoods() {
+    const searchTerm = searchBar.value.toLowerCase();
+    foodDropdown.innerHTML = ''; // Clear previous items
+
+    Object.keys(foods)
+        .filter(food => food.includes(searchTerm))
+        .forEach(food => {
+            const option = document.createElement('option');
+            option.value = food;
+            option.textContent = food.charAt(0).toUpperCase() + food.slice(1); // Capitalize first letter
+            foodDropdown.appendChild(option);
+        });
 }

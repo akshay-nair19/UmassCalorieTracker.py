@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMass Calorie Tracker - Calculator</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Minute Macros</h1>
+        <p>Where UMass Meets Mindful Nutrition</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="calculator.html">Calculator</a>
+    </nav>
+
+    <!-- Calculator Section -->
+    <section class="container">
+        <h2>Calorie Calculator</h2>
+        <p>Select foods to calculate total nutrients.</p>
+
+        <!-- Search and Dropdown for food selection -->
+        <div id="foodSelection">
+            <input type="text" id="searchBar" placeholder="Search for food..." oninput="filterFoods()" />
+            <select id="foodDropdown" disabled></select>
+            <button onclick="addFoodToSelection()" disabled id="addFoodButton">Add Food</button>
+        </div>
+
+        <!-- Display results -->
+        <div id="results" style="margin-top: 2em;"></div>
+    </section>
+
+    <script src="JS/script.js"></script>
+</body>
+</html>
