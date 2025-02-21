@@ -155,3 +155,19 @@ nav a:hover {
     border-radius: 8px;
 }
 
+#foodDropdown {
+    font-size: 1.2em; /* Make text larger */
+    padding: 12px; /* Increase padding for better clickability */
+    min-width: 250px; /* Set a minimum width */
+    height: 50px; /* Make it taller */
+    background-color: white; /* Keep background clean */
+    border: 2px solid #28a745; /* Add a clear border */
+    border-radius: 8px; /* Round edges */
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+/* Style for when dropdown is clicked */
+#foodDropdown:focus {
+    border-color: #218838; /* Darker green when focused */
+    outline: none;
+}
